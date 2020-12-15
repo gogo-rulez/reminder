@@ -1,4 +1,5 @@
 # pill-reminder
+A personal reminder
 
 ## Project setup
 ```
