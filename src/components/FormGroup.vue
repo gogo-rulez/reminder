@@ -85,7 +85,11 @@
 
         <div
             class="form__row">
-            <p class="form__next_pickup_date">Lijek se može podignuti: <span :class="{'is-warning': warnAboutDate}">{{ calculateNextPickup() }}</span></p>
+            <p
+                v-if="entryConfirmed"
+                class="form__next_pickup_date">
+                Lijek se može podignuti: <span :class="{'is-warning': warnAboutDate}">{{ calculateNextPickup() }}</span>
+            </p>
         </div>
 
     </div>
@@ -106,7 +110,8 @@ export default {
             },
             warnAboutDate: false,
             btnDisabled: true,
-            showCalculatedText: false
+            showCalculatedText: false,
+            entryConfirmed: false
         };
     },
 
@@ -143,6 +148,7 @@ export default {
 
             this.$emit('drugInfo', drugObject);
             this.btnDisabled = true;
+            this.entryConfirmed = true;
         },
 
         deleteDrug () {
