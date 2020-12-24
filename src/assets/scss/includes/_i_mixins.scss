@@ -1,0 +1,30 @@
+$body-size: 16px;
+
+@function strip-unit($number) {
+    @if type-of($number)=='number'and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+
+    @return $number;
+}
+
+@function rem($sizeValue: 0) {
+    @return (strip-unit($sizeValue) / strip-unit($body-size))+rem;
+}
+
+@mixin rem($sizeValue: 0) {
+    // font-size: ($sizeValue * 1) + px;
+    font-size: rem($sizeValue);
+}
+
+@mixin max-screen($res) {
+    @media screen and (max-width: $res) {
+        @content;
+    }
+}
+
+@mixin min-screen($res) {
+    @media screen and (min-width: $res) {
+        @content;
+    }
+}

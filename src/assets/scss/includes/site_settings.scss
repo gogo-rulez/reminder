@@ -1,0 +1,22 @@
+// colors
+$turquoise: #3eb9c8;
+$light-grey: #f9f9f8;
+$grey: #b8b8b8;
+$dark-grey: #9b9b9b;
+$black: #0e0e0e;
+$red: #ff1313;
+$purple: #9B5DE5;
+$pink: #F15BB5;
+$yellow: #FEE440;
+$blue: #00BBF9;
+
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+$fontReg: normal 400 100% "Roboto", sans-serif;
+$fontBold: normal 700 100% "Roboto", sans-serif;
+
+// breakpoints
+$phablet: 550px;
+$tablet: 768px;
+$desktop: 1024px;
+$widescreen: 1360px;
