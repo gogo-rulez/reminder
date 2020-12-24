@@ -142,7 +142,8 @@ export default {
         async getPatientInfo () {
             this.patientDetails = await this.getPatientDetails(this.$route.params.id).then(val => val);
 
-            console.log(this.patientDetails);
+            if (!this.patientDetails) return;
+            console.log('evo me', this.patientDetails);
 
             this.numberOfDrugs = this.patientDetails.drugs ? Object.keys(this.patientDetails.drugs).length : 0;
             this.patientName = this.patientDetails.info.patientName;
@@ -185,18 +186,23 @@ export default {
 
             console.log({ dataSaved });
 
+            // if the data wasn't saved, it means that the there already exists a database entry with the current patientPin
             if (!dataSaved) {
                 this.userWithPinExists = true;
+                return;
             }
 
             this.userWithPinExists = false;
-            this.getPatientInfo();
 
-            if (this.$route.params.id === this.patientPin) return;
+            if (this.$route.params.id === this.patientPin) {
+                this.getPatientInfo();
+                return;
+            }
 
             this.existingPatient = true;
 
             this.$router.push({ name: 'PatientDetail', params: { id: this.patientPin } });
+            this.getPatientInfo();
         },
 
         saveDrugData (drugData, i) {

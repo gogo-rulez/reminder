@@ -86,8 +86,7 @@ export default new Vuex.Store({
                         });
                     });
 
-                    resolve(true);
-                    dispatch('getPatientsData');
+                    dispatch('getPatientsData').then(() => resolve(true));
 
                 });
 
@@ -108,6 +107,10 @@ export default new Vuex.Store({
         deleteDrugEntry ({ dispatch }, info) {
 
             return new Promise(resolve => {
+
+                // delete drug entry
+                // wait for data to be collected
+                // resolve promise
 
                 patients.child(`${info.patientPin}/drugs/${info.drugName}`)
                     .remove()
