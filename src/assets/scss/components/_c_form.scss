@@ -1,0 +1,142 @@
+$f: form;
+
+
+.#{$f} {
+
+    margin: 50px 0;
+
+    &__row {
+        &:last-child,
+        &:nth-child(n-1) {
+            margin: 10px 0 0;
+        }
+
+        &.has-multiple-children {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto;
+            grid-gap: 20px;
+        }
+    }
+
+    &__group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-flow: row;
+        grid-gap: 20px;
+        margin: 50px 0 0;
+    }
+
+    &__label {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        font-size: rem(18);
+    }
+
+    &__input {
+        width: 100%;
+        height: 40px;
+        padding: 0 10px;
+        border-radius: 4px;
+        font-size: rem(18);
+        border: 1px solid $grey;
+
+        &.has-error {
+            border-color: $red;
+        }
+    }
+
+    &__input_error {
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        height: 24px;
+        font: $fontBold;
+        font-size: rem(14);
+        color: $red;
+    }
+
+    &__checkbox {
+        width: 20px;
+        height: 20px;
+        margin: 0 20px 0 0;
+    }
+
+    &__confirm_entry_btn,
+    &__delete_entry_btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        border-radius: 4px;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.33s;
+
+        &.is-disabled {
+            pointer-events: none;
+            cursor: default;
+            opacity: 0.5;
+        }
+    }
+
+    &__confirm_entry_btn {
+        background-color: $turquoise;
+
+        &:hover {
+            background-color: darken($turquoise, 10%);
+        }
+    }
+
+    &__delete_entry_btn {
+        background-color: $light-grey;
+        border: 1px solid $dark-grey;
+        color: $red;
+
+        &:hover {
+            color: darken($red, 10%);
+        }
+    }
+
+    &__next_pickup_date {
+        display: flex;
+        align-items: center;
+        height: 100%;
+
+        span {
+            margin: 0 0 0 5px;
+
+            &.is-warning {
+                color: $red;
+            }
+        }
+    }
+
+    &__submit_wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+        margin: 60px 0;
+    }
+
+    &__add_more_btn,
+    &__save_info_btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        border-radius: 4px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    &__add_more_btn {
+        background-color: $turquoise;
+    }
+
+    &__save_info_btn {
+        background-color: $blue;
+    }
+
+}

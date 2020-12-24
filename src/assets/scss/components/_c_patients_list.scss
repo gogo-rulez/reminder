@@ -1,0 +1,39 @@
+$pl: patients_list;
+
+
+.#{$pl} {
+
+    &__item {
+        display: flex;
+        align-items: center;
+        height: 50px;
+        padding: 0 15px;
+        margin: 20px 0 0;
+        border-bottom: 1px solid $grey;
+        font-size: rem(24);
+
+        a {
+            color: $black;
+        }
+
+        &--add_new {
+            border: none;
+
+            a {
+                display: flex;
+                align-items: center;
+                height: 50px;
+                padding: 0 10px;
+                border-radius: 4px;
+                background-color: $dark-grey;
+                font-size: rem(18);
+                color: #fff;
+
+                &:hover {
+                    background-color: $blue;
+                }
+            }
+        }
+    }
+
+}

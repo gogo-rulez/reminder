@@ -1,0 +1,19 @@
+body {
+    padding: 50px 0 0;
+    font: $fontReg;
+    color: $black;
+}
+
+.site_wrap {
+    padding: 0 15px;
+
+    @include min-screen($desktop) {
+        padding: 0 30px;
+        max-width: $desktop;
+        margin: 0 auto;
+    }
+
+    @include min-screen($widescreen) {
+        max-width: $widescreen;
+    }
+}
