@@ -66,6 +66,12 @@
                 Spremi podatke
             </a>
 
+            <router-link
+                :to="{ name: 'Home' }"
+                class="form__back_btn">
+                Povratak na listu
+            </router-link>
+
         </div>
 
     </form>
@@ -170,6 +176,8 @@ export default {
                 patientName: this.patientName,
                 drugs: this.drugs
             };
+
+            console.log(patientData.drugs);
 
             // if this is an existing user, and for some reason the patientPin changes
             // delete this user with the old existingPatientPin

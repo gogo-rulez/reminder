@@ -9,9 +9,6 @@
                 {{ entry.info.patientName }}
             </router-link>
         </li>
-        <li class="patients_list__item patients_list__item--add_new">
-            <router-link :to="{ name: 'PatientDetail' }">Dodaj pacijenta</router-link>
-        </li>
     </ul>
 </template>
 

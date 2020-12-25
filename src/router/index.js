@@ -1,21 +1,27 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
-import PatientDetail from '../views/PatientDetail.vue';
+import PatientDetail from '../views/PatientDetail';
+import ExpiringDrugs from '../views/ExpiringDrugs';
 
 Vue.use(VueRouter);
 
 const routes = [
     {
+        path: '/patient/:id?',
+        name: 'PatientDetail',
+        component: PatientDetail,
+    },
+    {
+        path: '/expiring',
+        name: 'ExpiringDrugs',
+        component: ExpiringDrugs,
+    },
+    {
         path: '/',
         name: 'Home',
         component: Home,
     },
-    {
-        path: '/patient/:id?',
-        name: 'PatientDetail',
-        component: PatientDetail,
-    }
 ];
 
 const router = new VueRouter({

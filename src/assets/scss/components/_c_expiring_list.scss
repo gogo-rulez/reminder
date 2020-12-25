@@ -1,0 +1,36 @@
+$el: expiring_list;
+
+
+.#{$el} {
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        padding: 0 15px 30px;
+        margin: 20px 0 0;
+        border-bottom: 1px solid $grey;
+    }
+
+    &__patient_name {
+        font-size: rem(24);
+
+        a {
+            color: $black;
+        }
+    }
+
+    &__drugs_info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 20px;
+        margin: 20px 0 0;
+        font-size: rem(18);
+        color: $red;
+
+        span {
+            color: $black;
+        }
+    }
+
+}

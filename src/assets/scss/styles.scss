@@ -7,6 +7,11 @@
 @import "modules/m_layout";
 
 
+@import "components/c_header";
 @import "components/c_form";
 @import "components/c_patients_list";
+@import "components/c_expiring_list";
+
+
+@import "views/v_home";
 
