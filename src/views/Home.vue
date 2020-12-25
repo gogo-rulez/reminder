@@ -4,6 +4,19 @@
             v-if="patientsDataReady"
             :patients-data="patientsDataFromStore || {}"
         ></patients-list>
+
+        <div class="home__buttons_wrap">
+            <router-link
+                :to="{ name: 'PatientDetail' }"
+                class="home__add_patient_btn">
+                Dodaj pacijenta
+            </router-link>
+            <router-link
+                :to="{ name: 'ExpiringDrugs' }"
+                class="home__view_list_btn">
+                Lista lijekova
+            </router-link>
+        </div>
     </div>
 </template>
 

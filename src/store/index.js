@@ -76,12 +76,13 @@ export default new Vuex.Store({
                     console.log({ drugs });
 
                     drugs.forEach(drug => {
-                        console.log('from foreach loop', drug.drugAtUserExpense);
+                        console.log('from foreach loop', drug);
                         patients.child(`${patientPin}/drugs/${drug.drugName}`).set({
                             drugName: drug.drugName,
                             drugAmount: drug.drugAmount,
                             drugDailyDose: drug.drugDailyDose,
                             drugPickupDate: drug.drugPickupDate,
+                            drugNextPickupDate: drug.drugNextPickupDate,
                             drugAtUserExpense: drug.drugAtUserExpense
                         });
                     });

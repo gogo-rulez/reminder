@@ -86,7 +86,6 @@
         <div
             class="form__row">
             <p
-                v-if="entryConfirmed"
                 class="form__next_pickup_date">
                 Lijek se može podignuti: <span :class="{'is-warning': warnAboutDate}">{{ calculateNextPickup() }}</span>
             </p>
@@ -108,10 +107,10 @@ export default {
                 drugPickupDate: this.existingDrug?.drugPickupDate || '',
                 drugAtUserExpense: this.existingDrug?.drugAtUserExpense || false
             },
+            drugNextPickupDate: '',
             warnAboutDate: false,
             btnDisabled: true,
             showCalculatedText: false,
-            entryConfirmed: false
         };
     },
 
@@ -120,8 +119,9 @@ export default {
             deep: true,
             handler () {
                 this.btnDisabled = false;
+                this.drugNextPickupDate = this.calculateNextPickup(true);
             }
-        }
+        },
     },
 
     props: {
@@ -143,19 +143,19 @@ export default {
                 drugAmount: Number(this.drugData.drugAmount),
                 drugDailyDose: Number(this.drugData.drugDailyDose),
                 drugPickupDate: this.drugData.drugPickupDate,
+                drugNextPickupDate: this.drugNextPickupDate,
                 drugAtUserExpense: this.drugData.drugAtUserExpense,
             };
 
             this.$emit('drugInfo', drugObject);
             this.btnDisabled = true;
-            this.entryConfirmed = true;
         },
 
         deleteDrug () {
             this.$emit('deleteDrug', this.drugData.drugName);
         },
 
-        calculateNextPickup () {
+        calculateNextPickup (returnNextPickupDate = false) {
 
             if (!this.drugData.drugAmount || !this.drugData.drugDailyDose || !this.drugData.drugPickupDate) return;
 
@@ -167,6 +167,12 @@ export default {
             const futureDay = futureDate.getDate();
             const futureMonth = futureDate.getMonth() + 1;
             const futureYear = futureDate.getFullYear();
+
+            console.log('drugNextPickupDate', this.drugNextPickupDate);
+
+            if (returnNextPickupDate) {
+                return `${futureYear}-${futureMonth}-${futureDay}`;
+            }
 
             if (daysUntilNextPickup < 5) {
                 this.warnAboutDate = true;

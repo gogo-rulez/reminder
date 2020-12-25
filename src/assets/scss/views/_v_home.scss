@@ -1,0 +1,26 @@
+$h: home;
+
+.#{$h} {
+
+    &__buttons_wrap {
+        margin: 40px 0 0;
+    }
+
+    &__view_list_btn,
+    &__add_patient_btn {
+        display: inline-flex;
+        align-items: center;
+        height: 50px;
+        padding: 0 10px;
+        border-radius: 4px;
+        margin: 0 15px;
+        background-color: $dark-grey;
+        font-size: rem(18);
+        color: #fff;
+
+        &:hover {
+            background-color: $blue;
+        }
+    }
+
+}
