@@ -52,7 +52,7 @@ export default new Vuex.Store({
 
         savePatientInfo ({ dispatch }, patientData) {
             const {
-                patientPinChanged, patientPin, patientName, drugs
+                patientPinChanged, patientPin, patientName, patientDoctorContact, patientDoctorName, drugs
             } = patientData;
             console.log('save patient entry');
 
@@ -70,7 +70,9 @@ export default new Vuex.Store({
 
                     patients.child(`${patientPin}/info`).set({
                         patientName,
-                        patientPin
+                        patientPin,
+                        patientDoctorName,
+                        patientDoctorContact
                     });
 
                     console.log({ drugs });

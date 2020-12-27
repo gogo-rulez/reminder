@@ -30,10 +30,15 @@ export default {
         ...mapGetters(['patientsDataFromStore'])
     },
 
+    watch: {
+        $route () {
+            console.log('route changed');
+            this.getExpiringDrugs();
+        }
+    },
+
     mounted () {
-
         this.getExpiringDrugs();
-
     },
 
     methods: {
@@ -41,6 +46,9 @@ export default {
         ...mapActions(['getPatientsData']),
 
         async getExpiringDrugs () {
+
+            this.expiringDrugs = {};
+            this.dataReady = false;
 
             if (!Object.keys(this.patientsDataFromStore).length) {
                 await this.getPatientsData();
@@ -63,25 +71,38 @@ export default {
 
                 expiringDrugs = entryValues.filter(x => {
 
+                    const atUserExpense = this.$route.params.type === 'payed';
+                    console.log(atUserExpense);
+
+                    if (x.drugAtUserExpense !== atUserExpense) return;
+
                     const nextPickupTimestamp = new Date(x.drugNextPickupDate).getTime();
                     const difference = nextPickupTimestamp - currentTimestamp;
                     const expiresInDays = difference / (24 * 60 * 60 * 1000);
 
                     if (expiresInDays > 4) return;
 
-                    x.patientName = entry.info.patientName;
-                    x.patientPin = entry.info.patientPin;
-
                     return x;
 
                 });
 
-                this.expiringDrugs[entry.info.patientPin] = {
+                console.log(entry.info.patientName, expiringDrugs);
+
+                if (!expiringDrugs.length) return;
+
+                console.log(this.expiringDrugs[entry.info.patientDoctorName]);
+
+                if (!this.expiringDrugs[entry.info.patientDoctorName]) {
+                    this.expiringDrugs[entry.info.patientDoctorName] = {};
+                }
+
+                this.expiringDrugs[entry.info.patientDoctorName][entry.info.patientName] = {
                     info: {
                         patientName: entry.info.patientName,
                         patientPin: entry.info.patientPin
                     },
                     drugs: expiringDrugs
+
                 };
 
                 // this.expiringDrugs[entry.info.patientName] = expiringDrugs;

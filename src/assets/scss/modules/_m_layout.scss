@@ -2,6 +2,10 @@ body {
     padding: 70px 0 0;
     font: $fontReg;
     color: $black;
+
+    @media print {
+        padding: 0;
+    }
 }
 
 .site_wrap {
@@ -15,5 +19,10 @@ body {
 
     @include min-screen($widescreen) {
         max-width: $widescreen;
+    }
+
+    @media print {
+        width: 100%;
+        padding: 0;
     }
 }

@@ -11,6 +11,10 @@ $h: header;
     padding: 0 20px;
     box-shadow: 0 2px 8px $grey;
 
+    @media print {
+        display: none;
+    }
+
     &__nav {
         display: flex;
         height: 50px;

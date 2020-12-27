@@ -9,9 +9,14 @@
                 Početna
             </router-link>
             <router-link
-                :to="{ name: 'ExpiringDrugs' }"
+                :to="{ name: 'ExpiringDrugs', params: { type: 'free' } }"
                 exact>
-                Lista za narudžbu
+                Lista besplatnih lijekova
+            </router-link>
+            <router-link
+                :to="{ name: 'ExpiringDrugs', params: { type: 'payed' } }"
+                exact>
+                Lista plaćenih lijekova
             </router-link>
 
         </nav>
