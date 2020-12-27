@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { database } from '@/mixins/firebaseMixin';
+import { database, auth } from '@/mixins/firebaseMixin';
 
 const patients = database.ref('/patients');
 
@@ -8,10 +8,13 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        patientsInfo: {}
+        patientsInfo: {},
+        username: '',
+        isAuthenticated: false
     },
     getters: {
-        patientsDataFromStore: state => state.patientsInfo
+        patientsDataFromStore: state => state.patientsInfo,
+        isAuthenticated: state => state.isAuthenticated
     },
     mutations: {
         SAVE_PATIENT_INFO () {
@@ -21,9 +24,38 @@ export default new Vuex.Store({
         SAVE_PATIENT_DATA (state, data) {
             console.log('from save_patient_data', data);
             state.patientsInfo = data;
+        },
+
+        LOGIN_USER (state, data) {
+            state.isAuthenticated = true;
+            state.username = data.email;
+        },
+
+        LOGOUT_USER (state) {
+            state.isAuthenticated = false;
+            state.username = '';
         }
     },
     actions: {
+
+        loginUser ({ commit }, data) {
+            auth.signInWithEmailAndPassword(data.username, data.password)
+                .then(user => {
+                    commit('LOGIN_USER', user);
+                    console.log('user', user);
+                })
+                .catch(error => {
+                    console.log('error', error);
+                });
+        },
+
+        logoutUser ({ commit }) {
+            auth.signOut()
+                .then (() => {
+                    commit('LOGOUT_USER');
+                });
+        },
+
         getPatientsData ({ commit }) {
             return new Promise(resolve => {
                 patients.once('value', snapshot => {

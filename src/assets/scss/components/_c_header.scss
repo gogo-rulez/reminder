@@ -6,6 +6,8 @@ $h: header;
     position: fixed;
     top: 0;
     left: 0;
+    display: flex;
+    align-items: center;
     width: 100%;
     height: 50px;
     padding: 0 20px;
@@ -34,6 +36,22 @@ $h: header;
             &:not(:first-child) {
                 margin: 0 0 0 30px;
             }
+        }
+    }
+
+    &__logout_btn {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        padding: 0 10px;
+        border-radius: 4px;
+        background-color: $red;
+        color: #fff;
+        margin: 0 0 0 auto;
+        cursor: pointer;
+
+        &:hover {
+            background-color: darken($red, 10%);
         }
     }
 }
