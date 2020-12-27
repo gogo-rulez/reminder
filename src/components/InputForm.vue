@@ -34,6 +34,34 @@
 
             </div>
 
+            <div class="form__row">
+                <label
+                    for="patient-doctor-name"
+                    class="form__label">
+                    Ime doktora
+                </label>
+                <input
+                    v-model="patientDoctorName"
+                    type="text"
+                    class="form__input"
+                    name="patient-doctor-name"
+                    id="patient-doctor-name">
+            </div>
+
+            <div class="form__row">
+                <label
+                    for="patient-doctor-contact"
+                    class="form__label">
+                    Kontakt doktora
+                </label>
+                <input
+                    v-model="patientDoctorContact"
+                    type="text"
+                    class="form__input"
+                    name="patient-doctor-contact"
+                    id="patient-doctor-contact">
+            </div>
+
         </div>
 
         <template v-for="i in numberOfDrugs">
@@ -92,6 +120,8 @@ export default {
         return {
             patientName: '',
             patientPin: '',
+            patientDoctorName: '',
+            patientDoctorContact: '',
             numberOfDrugs: 0,
             drugs: [],
             existingPatient: false,
@@ -154,6 +184,8 @@ export default {
             this.numberOfDrugs = this.patientDetails.drugs ? Object.keys(this.patientDetails.drugs).length : 0;
             this.patientName = this.patientDetails.info.patientName;
             this.patientPin = this.patientDetails.info.patientPin;
+            this.patientDoctorName = this.patientDetails.info.patientDoctorName;
+            this.patientDoctorContact = this.patientDetails.info.patientDoctorContact;
             this.existingPatientPin = this.patientDetails.info.patientPin;
             this.drugs = [];
             const $this = this;
@@ -174,6 +206,8 @@ export default {
                 patientPinChanged: this.existingPatientPin !== this.patientPin,
                 patientPin: this.patientPin,
                 patientName: this.patientName,
+                patientDoctorName: this.patientDoctorName,
+                patientDoctorContact: this.patientDoctorContact,
                 drugs: this.drugs
             };
 
