@@ -13,7 +13,7 @@ const routes = [
         component: PatientDetail,
     },
     {
-        path: '/expiring/:type',
+        path: '/expiring/:type?',
         name: 'ExpiringDrugs',
         component: ExpiringDrugs,
     },

@@ -1,5 +1,7 @@
 <template>
-    <header class="header">
+    <header
+        v-if="headerReady"
+        class="header">
 
         <nav class="header__nav">
 
@@ -21,11 +23,32 @@
 
         </nav>
 
+        <a
+            role="button"
+            class="header__logout_btn"
+            @click="logoutUser()">Odjava</a>
+
     </header>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
-    name: 'SiteHeader'
+    name: 'SiteHeader',
+
+    data () {
+        return {
+            headerReady: false
+        };
+    },
+
+    mounted () {
+        this.headerReady = true;
+    },
+
+    methods: {
+        ...mapActions(['logoutUser'])
+    }
 };
 </script>
