@@ -1,0 +1,22 @@
+$ed: expiring_drugs;
+
+.#{$ed} {
+
+    &__print_btn {
+        display: inline-flex;
+        align-items: center;
+        height: 50px;
+        padding: 0 30px;
+        border-radius: 4px;
+        margin: 30px 15px;
+        background-color: $blue;
+        font-size: rem(18);
+        color: #fff;
+        cursor: pointer;
+
+        &:hover {
+            background-color: darken($blue, 10%);
+        }
+    }
+
+}
