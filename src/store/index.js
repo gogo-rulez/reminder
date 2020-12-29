@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { database, auth } from '@/mixins/firebaseMixin';
+import { database, auth, authSettings } from '@/mixins/firebaseMixin';
 
 const patients = database.ref('/patients');
 
@@ -27,6 +27,7 @@ export default new Vuex.Store({
         },
 
         LOGIN_USER (state, data) {
+            console.log('data', data);
             state.isAuthenticated = true;
             state.username = data.email;
         },
@@ -38,15 +39,33 @@ export default new Vuex.Store({
     },
     actions: {
 
-        loginUser ({ commit }, data) {
-            auth.signInWithEmailAndPassword(data.username, data.password)
-                .then(user => {
-                    commit('LOGIN_USER', user);
-                    console.log('user', user);
-                })
-                .catch(error => {
-                    console.log('error', error);
+        checkAuthentication ({ commit }) {
+            return new Promise((resolve, reject) => {
+                auth.onAuthStateChanged(user => {
+                    if (user) {
+                        commit('LOGIN_USER', user);
+                        resolve(true);
+                    } else {
+                        console.log('user signed out');
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        reject(false);
+                    }
                 });
+
+            });
+        },
+
+        loginUser ({ commit }, data) {
+            console.log(auth);
+            auth.setPersistence(authSettings.Auth.Persistence.SESSION)
+                .then(() => auth.signInWithEmailAndPassword(data.username, data.password)
+                    .then(user => {
+                        commit('LOGIN_USER', user);
+                        console.log('user', user);
+                    })
+                    .catch(error => {
+                        console.log('error', error);
+                    }));
         },
 
         logoutUser ({ commit }) {

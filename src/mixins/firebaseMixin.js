@@ -3,6 +3,8 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/database';
 
+console.log('firebase', firebase);
+
 firebase.initializeApp({
     apiKey: 'AIzaSyCXb5gnml2RKPTBIoKTG8DHhpmIXndyxWc',
     authDomain: 'pill-reminder-ece9f.firebaseapp.com',
@@ -15,6 +17,7 @@ firebase.initializeApp({
 
 // utils
 const db = firebase.firestore();
+const authSettings = firebase.auth;
 const auth = firebase.auth();
 const database = firebase.database();
 
@@ -22,5 +25,6 @@ const database = firebase.database();
 export {
     db,
     auth,
+    authSettings,
     database
 };

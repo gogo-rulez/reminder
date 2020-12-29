@@ -5,6 +5,11 @@
 
         <expiring-list :expiring-drugs="expiringDrugs"></expiring-list>
 
+        <a
+            role="button"
+            class="expiring_drugs__print_btn"
+            @click="printList()">Print</a>
+
     </div>
 </template>
 
@@ -44,6 +49,10 @@ export default {
     methods: {
 
         ...mapActions(['getPatientsData']),
+
+        printList () {
+            window.print();
+        },
 
         async getExpiringDrugs () {
 

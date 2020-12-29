@@ -1,6 +1,7 @@
 <template>
     <div
         id="app"
+        v-if="pageReady"
         class="site_wrap">
 
         <template v-if="isAuthenticated">
@@ -9,7 +10,7 @@
         </template>
 
         <div
-            v-else-if="pageReady"
+            v-else
             class="modal modal--login">
 
             <div class="modal__header">
@@ -83,11 +84,17 @@ export default {
     },
 
     mounted () {
-        this.pageReady = true;
+        this.checkAuthentication()
+            .then(() => {
+                this.pageReady = true;
+            })
+            .catch (() => {
+                this.pageReady = true;
+            });
     },
 
     methods: {
-        ...mapActions(['loginUser'])
+        ...mapActions(['loginUser', 'checkAuthentication'])
     }
 };
 </script>
